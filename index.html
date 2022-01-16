@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw</title>
+
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="toolbar">
+        <div class="toolbar__brush-size">
+            <button onclick="increaseBrushSize()" title="Increase brush size">+</button>
+            <div class="toolbar__brush-preview"></div>
+            <button onclick="decreaseBrushSize()" title="Decrease brush size">-</button>
+        </div>
+        <div class="toolbar__color">
+            <input type="color" onchange="onBrushColorChange(event)">
+        </div>
+        <div class="toolbar__eraser">
+            <button id="eraser-button" onclick="toggleErase()">Erase</button>
+        </div>
+    </div>
+</body>
+
+<script src="./index.js"></script>
+</html>
