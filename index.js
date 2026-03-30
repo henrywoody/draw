@@ -9,107 +9,107 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 window.addEventListener("mousedown", () => {
-    beginLine();
+	beginLine();
 });
 
 window.addEventListener("touchstart", () => {
-    beginLine();
+	beginLine();
 });
 
 window.addEventListener("mouseup", () => {
-    endLine();
+	endLine();
 });
 
 window.addEventListener("touchend", () => {
-    endLine();
+	endLine();
 });
 
 window.addEventListener("mousemove", (event) => {
-    if (!isDrawing) {
-        return;
-    }
-    const { x, y } = event;
-    ctx.lineTo(x, y);
-    ctx.stroke();
+	if (!isDrawing) {
+		return;
+	}
+	const { x, y } = event;
+	ctx.lineTo(x, y);
+	ctx.stroke();
 });
 
 window.addEventListener("touchmove", (event) => {
-    if (!isDrawing) {
-        return;
-    }
-    for (let i = 0; i < event.touches.length; i++) {
-        const { clientX: x, clientY: y } = event.touches[i];
-        ctx.lineTo(x, y);
-        ctx.stroke();
-    }
+	if (!isDrawing) {
+		return;
+	}
+	for (let i = 0; i < event.touches.length; i++) {
+		const { clientX: x, clientY: y } = event.touches[i];
+		ctx.lineTo(x, y);
+		ctx.stroke();
+	}
 });
 
 function beginLine() {
-    ctx.beginPath();
-    ctx.lineWidth = brushSize;
-    isDrawing = true;
+	ctx.beginPath();
+	ctx.lineWidth = brushSize;
+	isDrawing = true;
 }
 
 function endLine() {
-    ctx.closePath();
-    isDrawing = false;
+	ctx.closePath();
+	isDrawing = false;
 }
 
 
 function increaseBrushSize() {
-    updateBrushSizeBy(1);
+	updateBrushSizeBy(1);
 }
 
 function decreaseBrushSize() {
-    updateBrushSizeBy(-1);
+	updateBrushSizeBy(-1);
 }
 
 function onBrushColorChange(event) {
-    updateBrushColor(event.target.value);
+	updateBrushColor(event.target.value);
 }
 
 const eraserButton = document.querySelector("#eraser-button");
 
 function toggleErase() {
-    if (isErasing) {
-        isErasing = false;
-        restoreBrushColor();
-        eraserButton.innerHTML = "Erase";
-    } else {
-        isErasing = true;
-        setTemporaryBrushColor("#fff");
-        eraserButton.innerHTML = "Draw";
-    }
+	if (isErasing) {
+		isErasing = false;
+		restoreBrushColor();
+		eraserButton.innerHTML = "Erase";
+	} else {
+		isErasing = true;
+		setTemporaryBrushColor("#fff");
+		eraserButton.innerHTML = "Draw";
+	}
 }
 
 const brushPreview = document.querySelector(".toolbar__brush-preview");
 
 function updateBrushSizeBy(diff) {
-    updateBrushSizeTo(Math.max(1, brushSize + diff));
+	updateBrushSizeTo(Math.max(1, brushSize + diff));
 }
 
 function updateBrushSizeTo(size) {
-    brushSize = size;
-    brushPreview.style.setProperty("--size", `${brushSize}px`);
+	brushSize = size;
+	brushPreview.style.setProperty("--size", `${brushSize}px`);
 }
 
 function updateBrushColor(color) {
-    brushColor = color;
-    ctx.strokeStyle = brushColor;
-    brushPreview.style.setProperty("--color", brushColor);
+	brushColor = color;
+	ctx.strokeStyle = brushColor;
+	brushPreview.style.setProperty("--color", brushColor);
 }
 
 function setTemporaryBrushColor(color) {
-    ctx.strokeStyle = color;
+	ctx.strokeStyle = color;
 }
 
 function restoreBrushColor() {
-    ctx.strokeStyle = brushColor;
+	ctx.strokeStyle = brushColor;
 }
 
 function init() {
-    updateBrushSizeTo(3);
-    updateBrushColor(brushColor);
+	updateBrushSizeTo(3);
+	updateBrushColor(brushColor);
 }
 
 init();
