@@ -11,6 +11,10 @@ body {
     overflow: hidden;
 }
 
+canvas {
+    cursor: crosshair;
+}
+
 button {
     padding: 0.25rem 0.3rem;
 }
